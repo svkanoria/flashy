@@ -13,6 +13,8 @@ const DisconnectedNotificationHook = {
     },
 
     disconnected() {
+        console.log("Flashy says: Disconnected")
+
         if (!this.timer) {
             this.timer = setTimeout(() => {
                 this.liveSocket.execJS(this.el, this.el.getAttribute("data-show"))
@@ -21,6 +23,8 @@ const DisconnectedNotificationHook = {
     },
 
     reconnected() {
+        console.log("Flashy says: Reconnected")
+
         clearTimeout(this.timer)
 
         this.timer = null
