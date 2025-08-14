@@ -11,6 +11,8 @@ defmodule Flashy.Container do
 
   attr :class, :string, default: ""
 
+  attr :handle_disconnected, :boolean, default: true
+
   attr :rest, :global
 
   def render(assigns) do
@@ -25,7 +27,11 @@ defmodule Flashy.Container do
 
     ~H"""
     <div {@heex_class} {@rest}>
-      <.render_notification key="disconnected" notification={@disconnected_notification} />
+      <.render_notification
+        :if={@handle_disconnected}
+        key="disconnected"
+        notification={@disconnected_notification}
+      />
 
       <.render_notification
         :for={{key, notification} <- Enum.sort_by(@flash, &sort_by_key/1)}
